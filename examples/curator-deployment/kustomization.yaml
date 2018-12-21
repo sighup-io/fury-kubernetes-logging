@@ -1,0 +1,35 @@
+namespace: logging
+
+bases:
+  - vendor/logging/elasticsearch-single
+  - vendor/logging/curator
+
+resources:
+- cronjob.yml
+- job.yml
+
+
+patches:
+  - elasticsearch-s3.yml
+  - curator-s3.yml
+
+configMapGenerator:
+- name: curator
+  behavior: replace
+  files:
+  - configs/action.yml
+  - configs/config.yml
+- name: task-scripts
+  files:
+  - configs/add_task.py
+
+secretGenerator:
+- name: curator-aws
+  commands:
+    ES_HOST: "printf elasticsearch"
+    S3_BUCKET_NAME: "printf ci-es-log-snapshot-backup"
+    AWS_ACCESS_KEY_ID: "printf -----"
+    AWS_SECRET_ACCESS_KEY: "printf -----"
+    AWS_REGION: "printf eu-west-1"
+    SNAPSHOT_S3_TASK: "printf s3_ci_backup"
+    UNIT_COUNT: "printf 20"

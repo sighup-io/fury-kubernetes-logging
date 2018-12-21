@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: snapshot-configurator
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 50000000
+  template:
+    metadata:
+      labels:
+        app: snapshot
+    spec:
+      containers:
+      - name: curator
+        image: 325969431625.dkr.ecr.eu-west-1.amazonaws.com/curator:13550e2-14
+        envFrom:
+        - secretRef:
+            name: curator-aws
+        command:
+        - python
+        args:
+        - /scripts/add_task.py
+        volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+      restartPolicy: OnFailure
+      volumes:
+      - name: scripts
+        configMap:
+          name: task-scripts

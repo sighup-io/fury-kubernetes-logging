@@ -1,0 +1,57 @@
+actions:
+  1:
+    action: snapshot
+    description: >-
+      Snapshot logstash- prefixed indices older than ${UNIT_COUNT:1} days (based on index
+      creation_date) with the default snapshot name pattern of
+      'curator-%Y%m%d%H%M%S'.  Wait for the snapshot to complete.  Do not skip
+      the repository filesystem access check.  Use the other options to create
+      the snapshot.
+    options:
+      # the repository name must match with the name of the s3 created task snapshot
+      repository: ${SNAPSHOT_S3_TASK:pippo-s3}
+      # Leaving name blank will result in the default 'curator-%Y%m%d%H%M%S'
+      name:
+      ignore_unavailable: False
+      include_global_state: True
+      partial: False
+      wait_for_completion: True
+      skip_repo_fs_check: False
+      timeout_override:
+      ignore_empty_list: True
+      continue_if_exception: False
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: logstash-
+      exclude:
+    - filtertype: age
+      source: creation_date
+      direction: older
+      unit: days
+      unit_count: ${UNIT_COUNT:1}
+      exclude:
+  2:
+    action: delete_indices
+    description: >-
+       Delete indices older than ${UNIT_COUNT:1} days (based on index name), for logstash-
+       prefixed indices. Ignore the error if the filter does not result in an
+       actionable list of indices (ignore_empty_list) and exit cleanly.
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: True
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: logstash-
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: ${UNIT_COUNT:1}
+      exclude:
