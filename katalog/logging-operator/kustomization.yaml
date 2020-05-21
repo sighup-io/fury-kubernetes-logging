@@ -1,0 +1,10 @@
+resources:
+  - logging.banzaicloud.io_clusterflows.yaml
+  - logging.banzaicloud.io_clusteroutputs.yaml
+  - logging.banzaicloud.io_flows.yaml
+  - logging.banzaicloud.io_loggings.yaml
+  - logging.banzaicloud.io_outputs.yaml
+  - rbac.yaml
+  - deployment.yaml
+
+namespace: logging

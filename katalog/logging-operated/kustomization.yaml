@@ -1,0 +1,6 @@
+resources:
+  - logging.yml
+  - clusterflow.yml
+  - clusteroutput.yml
+
+namespace: logging

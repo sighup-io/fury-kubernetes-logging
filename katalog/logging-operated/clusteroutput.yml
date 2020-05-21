@@ -1,0 +1,15 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterOutput
+metadata:
+  name: elasticsearch
+spec:
+  elasticsearch:
+    host: elasticsearch.logging.svc.cluster.local
+    port: 9200
+    scheme: http
+    logstash_format: true
+    logstash_prefix: logstash
+    buffer:
+      timekey: 1m
+      timekey_wait: 30s
+      timekey_use_utc: true

@@ -1,0 +1,11 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Logging
+metadata:
+  name: infra-logging
+spec:
+  fluentd:
+    disablePvc: true
+    scaling:
+      replicas: 2
+  fluentbit: {}
+  controlNamespace: logging
