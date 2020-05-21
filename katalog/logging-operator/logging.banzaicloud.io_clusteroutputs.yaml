@@ -10,10 +10,13 @@ metadata:
 spec:
   group: logging.banzaicloud.io
   names:
+    categories:
+      - logging-all
     kind: ClusterOutput
     listKind: ClusterOutputList
     plural: clusteroutputs
     singular: clusteroutput
+  preserveUnknownFields: false
   scope: Namespaced
   validation:
     openAPIV3Schema:
@@ -69,7 +72,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -94,7 +97,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -121,7 +124,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -146,7 +149,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -311,9 +314,9 @@ spec:
                   description: 'Store as: gzip, json, text, lzo, lzma2 (default: gzip)'
                   type: string
               required:
-              - azure_container
-              - azure_storage_access_key
-              - azure_storage_account
+                - azure_container
+                - azure_storage_access_key
+                - azure_storage_account
               type: object
             cloudwatch:
               properties:
@@ -348,7 +351,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -373,7 +376,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -400,7 +403,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -425,7 +428,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -610,13 +613,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 http_proxy:
@@ -708,7 +711,7 @@ spec:
                   description: Use tag as a stream name
                   type: boolean
               required:
-              - region
+                - region
               type: object
             elasticsearch:
               description: Send your logs to Elasticsearch
@@ -869,6 +872,214 @@ spec:
                     this size as negative number, bulk_message request splitting feature
                     will be disabled. (default: 20MB)'
                   type: string
+                ca_file:
+                  description: CA certificate
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                client_cert:
+                  description: Client certificate
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                client_key:
+                  description: Client certificate key
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                client_key_pass:
+                  description: Client key password
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
                 content_type:
                   description: 'With content_type application/x-ndjson, elasticsearch
                     plugin adds application/x-ndjson as Content-Type in payload. (default:
@@ -894,6 +1105,9 @@ spec:
                     to the rollover index created. This is useful in case of using
                     the Elasticsearch rollover API
                   type: string
+                enable_ilm:
+                  description: Enable Index Lifecycle Management (ILM).
+                  type: boolean
                 exception_backup:
                   description: 'Indicates whether to backup chunk when ignore exception
                     occurs. (default: true)'
@@ -941,6 +1155,15 @@ spec:
                     Elasticsearch::Transport::Transport::Errors::ServiceUnavailable,
                     etc.
                   type: string
+                ilm_policy:
+                  description: Specify ILM policy contents as Hash.
+                  type: string
+                ilm_policy_id:
+                  description: Specify ILM policy id.
+                  type: string
+                ilm_policy_overwrite:
+                  description: Specify whether overwriting ilm policy or not.
+                  type: boolean
                 include_index_in_url:
                   description: With this option set to true, Fluentd manifests the
                     index name in the request URL (rather than in the request body).
@@ -1018,7 +1241,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -1043,7 +1266,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -1132,6 +1355,11 @@ spec:
                     reuses the hosts given in the configuration, which is typically
                     the hostname of the load balancer or proxy. https://github.com/uken/fluent-plugin-elasticsearch#sniffer-class-name
                   type: string
+                ssl_max_version:
+                  description: Specify min/max SSL/TLS version
+                  type: string
+                ssl_min_version:
+                  type: string
                 ssl_verify:
                   description: 'Skip ssl verification (default: true)'
                   type: boolean
@@ -1162,7 +1390,56 @@ spec:
                   type: string
                 template_file:
                   description: The path to the file containing the template to install.
-                  type: string
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
                 template_name:
                   description: The name of the template to define. If a template by
                     the name given is already present, it will be left unchanged,
@@ -1420,13 +1697,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 path:
@@ -1442,7 +1719,7 @@ spec:
                     false)'
                   type: boolean
               required:
-              - path
+                - path
               type: object
             forward:
               properties:
@@ -1669,8 +1946,8 @@ spec:
                       description: If true, use user based authentication.
                       type: boolean
                   required:
-                  - self_hostname
-                  - shared_key
+                    - self_hostname
+                    - shared_key
                   type: object
                 send_timeout:
                   description: 'The timeout time when sending event logs. (default:
@@ -1715,7 +1992,7 @@ spec:
                                       key must be defined
                                     type: boolean
                                 required:
-                                - key
+                                  - key
                                 type: object
                             type: object
                           value:
@@ -1743,7 +2020,7 @@ spec:
                                       key must be defined
                                     type: boolean
                                 required:
-                                - key
+                                  - key
                                 type: object
                             type: object
                         type: object
@@ -1778,7 +2055,7 @@ spec:
                                       key must be defined
                                     type: boolean
                                 required:
-                                - key
+                                  - key
                                 type: object
                             type: object
                           value:
@@ -1806,7 +2083,7 @@ spec:
                                       key must be defined
                                     type: boolean
                                 required:
-                                - key
+                                  - key
                                 type: object
                             type: object
                         type: object
@@ -1842,7 +2119,7 @@ spec:
                                       key must be defined
                                     type: boolean
                                 required:
-                                - key
+                                  - key
                                 type: object
                             type: object
                           value:
@@ -1870,7 +2147,7 @@ spec:
                                       key must be defined
                                     type: boolean
                                 required:
-                                - key
+                                  - key
                                 type: object
                             type: object
                         type: object
@@ -1880,7 +2157,7 @@ spec:
                           events are sent in a 2:3 ratio. (default: 60).'
                         type: integer
                     required:
-                    - host
+                      - host
                     type: object
                   type: array
                 tls_allow_self_signed_cert:
@@ -1913,7 +2190,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -1938,7 +2215,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -1977,7 +2254,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2002,7 +2279,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2029,7 +2306,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2054,7 +2331,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2081,7 +2358,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2106,7 +2383,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2127,7 +2404,7 @@ spec:
                     nodes at the time of startup. (default: false)'
                   type: boolean
               required:
-              - servers
+                - servers
               type: object
             gcs:
               properties:
@@ -2317,7 +2594,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2342,7 +2619,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2363,13 +2640,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 hex_random_length:
@@ -2395,8 +2672,8 @@ spec:
                         description: Value
                         type: string
                     required:
-                    - key
-                    - value
+                      - key
+                      - value
                     type: object
                   type: array
                 overwrite:
@@ -2419,8 +2696,554 @@ spec:
                   description: Enable the decompressive form of transcoding
                   type: boolean
               required:
-              - bucket
-              - project
+                - bucket
+                - project
+              type: object
+            http:
+              properties:
+                auth:
+                  description: http_auth
+                  properties:
+                    password:
+                      description: Password for basic authentication.
+                      properties:
+                        mountFrom:
+                          description: Refers to a secret value to be used through
+                            a volume mount
+                          properties:
+                            secretKeyRef:
+                              description: SecretKeySelector selects a key of a Secret.
+                              properties:
+                                key:
+                                  description: The key of the secret to select from.  Must
+                                    be a valid secret key.
+                                  type: string
+                                name:
+                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    TODO: Add other useful fields. apiVersion, kind,
+                                    uid?'
+                                  type: string
+                                optional:
+                                  description: Specify whether the Secret or its key
+                                    must be defined
+                                  type: boolean
+                              required:
+                                - key
+                              type: object
+                          type: object
+                        value:
+                          description: Refers to a non-secret value
+                          type: string
+                        valueFrom:
+                          description: Refers to a secret value to be used directly
+                          properties:
+                            secretKeyRef:
+                              description: SecretKeySelector selects a key of a Secret.
+                              properties:
+                                key:
+                                  description: The key of the secret to select from.  Must
+                                    be a valid secret key.
+                                  type: string
+                                name:
+                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    TODO: Add other useful fields. apiVersion, kind,
+                                    uid?'
+                                  type: string
+                                optional:
+                                  description: Specify whether the Secret or its key
+                                    must be defined
+                                  type: boolean
+                              required:
+                                - key
+                              type: object
+                          type: object
+                      type: object
+                    username:
+                      description: Username for basic authentication.
+                      properties:
+                        mountFrom:
+                          description: Refers to a secret value to be used through
+                            a volume mount
+                          properties:
+                            secretKeyRef:
+                              description: SecretKeySelector selects a key of a Secret.
+                              properties:
+                                key:
+                                  description: The key of the secret to select from.  Must
+                                    be a valid secret key.
+                                  type: string
+                                name:
+                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    TODO: Add other useful fields. apiVersion, kind,
+                                    uid?'
+                                  type: string
+                                optional:
+                                  description: Specify whether the Secret or its key
+                                    must be defined
+                                  type: boolean
+                              required:
+                                - key
+                              type: object
+                          type: object
+                        value:
+                          description: Refers to a non-secret value
+                          type: string
+                        valueFrom:
+                          description: Refers to a secret value to be used directly
+                          properties:
+                            secretKeyRef:
+                              description: SecretKeySelector selects a key of a Secret.
+                              properties:
+                                key:
+                                  description: The key of the secret to select from.  Must
+                                    be a valid secret key.
+                                  type: string
+                                name:
+                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    TODO: Add other useful fields. apiVersion, kind,
+                                    uid?'
+                                  type: string
+                                optional:
+                                  description: Specify whether the Secret or its key
+                                    must be defined
+                                  type: boolean
+                              required:
+                                - key
+                              type: object
+                          type: object
+                      type: object
+                  required:
+                    - password
+                    - username
+                  type: object
+                buffer:
+                  properties:
+                    chunk_full_threshold:
+                      description: The percentage of chunk size threshold for flushing.
+                        output plugin will flush the chunk when actual size reaches
+                        chunk_limit_size * chunk_full_threshold (== 8MB * 0.95 in
+                        default)
+                      type: string
+                    chunk_limit_records:
+                      description: The max number of events that each chunks can store
+                        in it
+                      type: integer
+                    chunk_limit_size:
+                      description: 'The max size of each chunks: events will be written
+                        into chunks until the size of chunks become this size'
+                      type: string
+                    compress:
+                      description: If you set this option to gzip, you can get Fluentd
+                        to compress data records before writing to buffer chunks.
+                      type: string
+                    delayed_commit_timeout:
+                      description: The timeout seconds until output plugin decides
+                        that async write operation fails
+                      type: string
+                    disable_chunk_backup:
+                      description: Instead of storing unrecoverable chunks in the
+                        backup directory, just discard them. This option is new in
+                        Fluentd v1.2.6.
+                      type: boolean
+                    flush_at_shutdown:
+                      description: The value to specify to flush/write all buffer
+                        chunks at shutdown, or not
+                      type: boolean
+                    flush_interval:
+                      description: 'Default: 60s'
+                      type: string
+                    flush_mode:
+                      description: 'Default: default (equals to lazy if time is specified
+                        as chunk key, interval otherwise) lazy: flush/write chunks
+                        once per timekey interval: flush/write chunks per specified
+                        time via flush_interval immediate: flush/write chunks immediately
+                        after events are appended into chunks'
+                      type: string
+                    flush_thread_burst_interval:
+                      description: The sleep interval seconds of threads between flushes
+                        when output plugin flushes waiting chunks next to next
+                      type: string
+                    flush_thread_count:
+                      description: The number of threads of output plugins, which
+                        is used to write chunks in parallel
+                      type: integer
+                    flush_thread_interval:
+                      description: The sleep interval seconds of threads to wait next
+                        flush trial (when no chunks are waiting)
+                      type: string
+                    overflow_action:
+                      description: 'How output plugin behaves when its buffer queue
+                        is full throw_exception: raise exception to show this error
+                        in log block: block processing of input plugin to emit events
+                        into that buffer drop_oldest_chunk: drop/purge oldest chunk
+                        to accept newly incoming chunk'
+                      type: string
+                    path:
+                      description: 'The path where buffer chunks are stored. The ''*''
+                        is replaced with random characters. It''s highly recommended
+                        to leave this default. (default: operator generated)'
+                      type: string
+                    queue_limit_length:
+                      description: The queue length limitation of this buffer plugin
+                        instance
+                      type: integer
+                    queued_chunks_limit_size:
+                      description: Limit the number of queued chunks. If you set smaller
+                        flush_interval, e.g. 1s, there are lots of small queued chunks
+                        in buffer. This is not good with file buffer because it consumes
+                        lots of fd resources when output destination has a problem.
+                        This parameter mitigates such situations.
+                      type: integer
+                    retry_exponential_backoff_base:
+                      description: The base number of exponential backoff for retries
+                      type: string
+                    retry_forever:
+                      description: If true, plugin will ignore retry_timeout and retry_max_times
+                        options and retry flushing forever
+                      type: boolean
+                    retry_max_interval:
+                      description: The maximum interval seconds for exponential backoff
+                        between retries while failing
+                      type: string
+                    retry_max_times:
+                      description: The maximum number of times to retry to flush while
+                        failing
+                      type: integer
+                    retry_randomize:
+                      description: If true, output plugin will retry after randomized
+                        interval not to do burst retries
+                      type: boolean
+                    retry_secondary_threshold:
+                      description: The ratio of retry_timeout to switch to use secondary
+                        while failing (Maximum valid value is 1.0)
+                      type: string
+                    retry_timeout:
+                      description: The maximum seconds to retry to flush while failing,
+                        until plugin discards buffer chunks
+                      type: string
+                    retry_type:
+                      description: 'exponential_backoff: wait seconds will become
+                        large exponentially per failures periodic: output plugin will
+                        retry periodically with fixed intervals (configured via retry_wait)'
+                      type: string
+                    retry_wait:
+                      description: Seconds to wait before next retry to flush, or
+                        constant factor of exponential backoff
+                      type: string
+                    tags:
+                      description: 'When tag is specified as buffer chunk key, output
+                        plugin writes events into chunks separately per tags. (default:
+                        tag,time)'
+                      type: string
+                    timekey:
+                      description: Output plugin will flush chunks per specified time
+                        (enabled when time is specified in chunk keys)
+                      type: string
+                    timekey_use_utc:
+                      description: Output plugin decides to use UTC or not to format
+                        placeholders using timekey
+                      type: boolean
+                    timekey_wait:
+                      description: Output plugin writes chunks after timekey_wait
+                        seconds later after timekey expiration
+                      type: string
+                    timekey_zone:
+                      description: The timezone (-0700 or Asia/Tokyo) string for formatting
+                        timekey placeholders
+                      type: string
+                    total_limit_size:
+                      description: The size limitation of this buffer plugin instance.
+                        Once the total size of stored buffer reached this threshold,
+                        all append operations will fail with error (and data will
+                        be lost)
+                      type: string
+                    type:
+                      description: Fluentd core bundles memory and file plugins. 3rd
+                        party plugins are also available when installed.
+                      type: string
+                  type: object
+                content_type:
+                  description: Content-Type for HTTP request.
+                  type: string
+                endpoint:
+                  description: Endpoint for HTTP request.
+                  type: string
+                error_response_as_unrecoverable:
+                  description: 'Raise UnrecoverableError when the response code is
+                    non success, 1xx/3xx/4xx/5xx. If false, the plugin logs error
+                    message instead of raising UnrecoverableError. (default: true)'
+                  type: boolean
+                format:
+                  properties:
+                    add_newline:
+                      description: 'When type is single_value add ''\n'' to the end
+                        of the message (default: true)'
+                      type: boolean
+                    message_key:
+                      description: When type is single_value specify the key holding
+                        information
+                      type: string
+                    type:
+                      description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
+                        (default: json)'
+                      enum:
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
+                      type: string
+                  type: object
+                headers:
+                  additionalProperties:
+                    type: string
+                  description: Additional headers for HTTP request.
+                  type: object
+                http_method:
+                  description: 'Method for HTTP request. [post, put] (default: post)'
+                  type: string
+                open_timeout:
+                  description: Connection open timeout in seconds.
+                  type: integer
+                proxy:
+                  description: Proxy for HTTP request.
+                  type: string
+                read_timeout:
+                  description: Read timeout in seconds.
+                  type: integer
+                retryable_response_codes:
+                  description: 'List of retryable response codes. If the response
+                    code is included in this list, the plugin retries the buffer flush.
+                    (default: [503])'
+                  items:
+                    type: integer
+                  type: array
+                ssl_timeout:
+                  description: TLS timeout in seconds.
+                  type: integer
+                tls_ca_cert_path:
+                  description: The CA certificate path for TLS.
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                tls_ciphers:
+                  description: 'The cipher configuration of TLS transport. (default:
+                    ALL:!aNULL:!eNULL:!SSLv2)'
+                  type: string
+                tls_client_cert_path:
+                  description: The client certificate path for TLS.
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                tls_private_key_passphrase:
+                  description: The client private key passphrase for TLS.
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                tls_private_key_path:
+                  description: The client private key path for TLS.
+                  properties:
+                    mountFrom:
+                      description: Refers to a secret value to be used through a volume
+                        mount
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                    value:
+                      description: Refers to a non-secret value
+                      type: string
+                    valueFrom:
+                      description: Refers to a secret value to be used directly
+                      properties:
+                        secretKeyRef:
+                          description: SecretKeySelector selects a key of a Secret.
+                          properties:
+                            key:
+                              description: The key of the secret to select from.  Must
+                                be a valid secret key.
+                              type: string
+                            name:
+                              description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                TODO: Add other useful fields. apiVersion, kind, uid?'
+                              type: string
+                            optional:
+                              description: Specify whether the Secret or its key must
+                                be defined
+                              type: boolean
+                          required:
+                            - key
+                          type: object
+                      type: object
+                  type: object
+                tls_verify_mode:
+                  description: 'The verify mode of TLS. [peer, none] (default: peer)'
+                  type: string
+                tls_version:
+                  description: 'The default version of TLS transport. [TLSv1_1, TLSv1_2]
+                    (default: TLSv1_2)'
+                  type: string
+              required:
+                - endpoint
               type: object
             kafka:
               description: Send your logs to Kafka
@@ -2612,13 +3435,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 get_kafka_client_log:
@@ -2680,7 +3503,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2705,7 +3528,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2732,7 +3555,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2757,7 +3580,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2784,7 +3607,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2809,7 +3632,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2836,7 +3659,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2861,7 +3684,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2875,8 +3698,8 @@ spec:
                   description: 'Use default for unknown topics (default: false)'
                   type: boolean
               required:
-              - brokers
-              - format
+                - brokers
+                - format
               type: object
             kinesisStream:
               description: Send your logs to a Kinesis Stream
@@ -2902,8 +3725,8 @@ spec:
                       description: An identifier for the assumed role session
                       type: string
                   required:
-                  - role_arn
-                  - role_session_name
+                    - role_arn
+                    - role_session_name
                   type: object
                 aws_iam_retries:
                   description: The number of attempts to make (with exponential backoff)
@@ -2934,7 +3757,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -2959,7 +3782,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -2987,7 +3810,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3012,7 +3835,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -3041,7 +3864,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3066,7 +3889,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -3240,13 +4063,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 partition_key:
@@ -3277,7 +4100,7 @@ spec:
                   description: Name of the stream to put data.
                   type: string
               required:
-              - stream_name
+                - stream_name
               type: object
             loggingRef:
               type: string
@@ -3460,7 +4283,7 @@ spec:
                                     must be defined
                                   type: boolean
                               required:
-                              - key
+                                - key
                               type: object
                           type: object
                         value:
@@ -3486,7 +4309,7 @@ spec:
                                     must be defined
                                   type: boolean
                               required:
-                              - key
+                                - key
                               type: object
                           type: object
                       type: object
@@ -3518,7 +4341,7 @@ spec:
                     step-off.
                   type: integer
               required:
-              - endpoint
+                - endpoint
               type: object
             loki:
               properties:
@@ -3717,7 +4540,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3742,7 +4565,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -3782,7 +4605,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3807,7 +4630,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -3837,7 +4660,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3862,7 +4685,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -3893,7 +4716,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3918,7 +4741,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -3950,7 +4773,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -3975,7 +4798,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -4002,7 +4825,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -4027,7 +4850,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -4210,13 +5033,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 hex_random_length:
@@ -4256,10 +5079,10 @@ spec:
                     warning logs if delayed events were put into OSS
                   type: string
               required:
-              - aaccess_key_secret
-              - access_key_id
-              - bucket
-              - endpoint
+                - aaccess_key_secret
+                - access_key_id
+                - bucket
+                - endpoint
               type: object
             s3:
               properties:
@@ -4286,8 +5109,8 @@ spec:
                       description: An identifier for the assumed role session
                       type: string
                   required:
-                  - role_arn
-                  - role_session_name
+                    - role_arn
+                    - role_session_name
                   type: object
                 auto_create_bucket:
                   description: Create S3 bucket if it does not exists
@@ -4319,7 +5142,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -4344,7 +5167,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -4371,7 +5194,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -4396,7 +5219,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -4581,13 +5404,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 grant_full_control:
@@ -4703,7 +5526,7 @@ spec:
                     warning logs if delayed events were put into s3
                   type: string
               required:
-              - s3_bucket
+                - s3_bucket
               type: object
             splunkHec:
               description: SplunkHecOutput sends your logs to Splunk via Hec
@@ -4899,13 +5722,13 @@ spec:
                       description: 'Output line formatting: out_file,json,ltsv,csv,msgpack,hash,single_value
                         (default: json)'
                       enum:
-                      - out_file
-                      - json
-                      - ltsv
-                      - csv
-                      - msgpack
-                      - hash
-                      - single_value
+                        - out_file
+                        - json
+                        - ltsv
+                        - csv
+                        - msgpack
+                        - hash
+                        - single_value
                       type: string
                   type: object
                 hec_host:
@@ -4938,7 +5761,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -4963,7 +5786,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -5056,8 +5879,8 @@ spec:
                   description: List of SSL ciphers allowed.
                   type: string
               required:
-              - hec_host
-              - hec_token
+                - hec_host
+                - hec_token
               type: object
             sumologic:
               properties:
@@ -5096,7 +5919,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                     value:
@@ -5121,7 +5944,7 @@ spec:
                                 be defined
                               type: boolean
                           required:
-                          - key
+                            - key
                           type: object
                       type: object
                   type: object
@@ -5166,21 +5989,21 @@ spec:
                   description: 'Verify ssl certificate. (default: true)'
                   type: boolean
               required:
-              - endpoint
-              - source_name
+                - endpoint
+                - source_name
               type: object
           type: object
         status:
           description: OutputStatus defines the observed state of Output
           type: object
       required:
-      - spec
+        - spec
       type: object
   version: v1beta1
   versions:
-  - name: v1beta1
-    served: true
-    storage: true
+    - name: v1beta1
+      served: true
+      storage: true
 status:
   acceptedNames:
     kind: ""
