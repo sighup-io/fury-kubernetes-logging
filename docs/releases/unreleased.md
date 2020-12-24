@@ -7,6 +7,7 @@ StatefulSet. This setting allows fluentd to run on master nodes.
 
 - Remove fluentd StatefulSet tolerations.
 - Reduced Cerebro requests
+- Changed Kibana rolling strategy to Recreate and removing kibana cpu limits
 
 ## Upgrade path
 
